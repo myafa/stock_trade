@@ -15,7 +15,7 @@ class Kiwoom(QAxContainer.QAxWidget):
         super().__init__()
         self._createKiwoomInstance()
         self._setSignalSlots()
-    
+        self.file = open("test.txt", 'a')
     def _createKiwoomInstance(self):
         self.setControl("KHOPENAPI.KHOpenAPICtrl.1")
     def _setSignalSlots(self):
@@ -72,11 +72,13 @@ class Kiwoom(QAxContainer.QAxWidget):
         self.dynamicCall("SetRealReg(QString,QString,QString,QString)",screenNo,strCodeList,strFidList,strRealType)
     def receiveRealData(self,sCode, sRealType, sRealData):
         temp = []
+        
         for fid in RealType.REALTYPE[sRealType].keys():
             value = self.getCommRealData(sCode,fid)
             #self.rData[fid].append(value)
             temp+=value
-        print(temp)
+        self.file.write("".join(temp))    
+        print("".join(temp))
     def get_code_list_by_market(self, market):
         codeList =self.dynamicCall("GetCodeListByMarket(QString)",market)
         codeList = codeList.split(';')
