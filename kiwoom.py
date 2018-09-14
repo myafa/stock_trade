@@ -78,8 +78,8 @@ class Kiwoom(QAxContainer.QAxWidget):
             value = self.getCommRealData(sCode,fid)
             #self.rData[fid].append(value)
             temp+=value
-        self.file.write("".join(temp))    
-        print("".join(temp))
+        self.file.write("".join(temp)+"\n")    
+        print("".join(temp)+"\n")
     def get_code_list_by_market(self, market):
         codeList =self.dynamicCall("GetCodeListByMarket(QString)",market)
         codeList = codeList.split(';')
