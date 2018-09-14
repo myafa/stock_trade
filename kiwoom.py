@@ -6,7 +6,7 @@
 
 from PyQt5 import QtWidgets ,QAxContainer ,QtCore
 import time
-
+from datetime import datetime
 # In[ ]:
 
 
@@ -15,7 +15,8 @@ class Kiwoom(QAxContainer.QAxWidget):
         super().__init__()
         self._createKiwoomInstance()
         self._setSignalSlots()
-        self.file = open("test.txt", 'a')
+        fileName = datetime.now().strftime('%y%m%d')
+        self.file = open(fileName, 'a')
     def _createKiwoomInstance(self):
         self.setControl("KHOPENAPI.KHOpenAPICtrl.1")
     def _setSignalSlots(self):
